@@ -13,64 +13,19 @@ const wrapperStyles = {
 };
 
 class BasicMap extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      countries: [
-        // "Sweden",
-        // "France",
-        // "United States",
-        "Canada",
-        // "Djibouti",
-        // "Japan",
-        "Australia",
-        // "Spain",
-        "Portugal",
-        "United Kingdom",
-        "Italy",
-        "Croatia",
-        "Switzerland",
-        "Austria",
-        "Germany",
-        // "Finland",
-        // "Norway",
-        // "Morocco",
-        // "Egypt",
-        // "Brazil",
-        // "Hong Kong",
-        // "Mexico",
-      ],
-      showMap: true,
-    };
-    this.handleSecondClick = this.handleSecondClick.bind(this);
-    this.handleThirdClick = this.handleThirdClick.bind(this);
-  }
-
+  // eslint-disable-next-line
   handleClick(geography) {
-    this.console.log("Geography data: ", geography);
-  }
-
-  handleSecondClick() {
-    this.setState(state => {
-      return { showMap: !state.showMap };
-    });
-  }
-
-  handleThirdClick() {
-    this.setState(state => {
-      const countries = [...state.countries, "Iceland"];
-      return { countries };
-    });
+    console.log("Geography data: ", geography); // eslint-disable-line
   }
 
   render() {
     let map = (
       <p style={{ color: "#f9f3ec", textAlign: "center", fontSize: "3rem" }}>
-        Your map is empty :(
+        No country selected :(
       </p>
     );
-    const { countries, showMap } = this.state;
-    if (countries.length !== 0 && showMap) {
+    const { listOfCountries } = this.props;
+    if (listOfCountries && listOfCountries.length !== 0) {
       map = (
         <ComposableMap
           projectionConfig={{
@@ -89,7 +44,8 @@ class BasicMap extends Component {
               {(geographies, projection) =>
                 geographies.map(
                   geography =>
-                    countries.indexOf(geography.properties.name) !== -1 && (
+                    listOfCountries.indexOf(geography.properties.name) !==
+                      -1 && (
                       <Geography
                         key={geography.properties.name}
                         geography={geography}
@@ -127,12 +83,6 @@ class BasicMap extends Component {
     return (
       <>
         <div style={wrapperStyles}>{map}</div>
-        <button onClick={this.handleSecondClick} type="button">
-          CLICK ME 2nd{" "}
-        </button>
-        <button onClick={this.handleThirdClick} type="button">
-          CLICK ME 3rd{" "}
-        </button>
       </>
     );
   }

@@ -7,24 +7,29 @@ class LandingPage extends React.Component {
     super(props);
     this.state = {
       showMap: false,
+      listOfCountries: [],
     };
-    this.myCallback = this.myCallback.bind(this);
+    this.showMapOrList = this.showMapOrList.bind(this);
   }
 
-  myCallback(value) {
-    console.log(value);
+  showMapOrList() {
     this.setState(state => {
-      return {
-        showMap: !state.showMap,
-      };
+      return { showMap: !state.showMap };
     });
   }
 
   render() {
+    const { listOfCountries, showMap } = this.state;
     return (
       <>
-        <BasicMap />
-        <CountryInput callbackfromParent={this.myCallback} />
+        <button type="button" onClick={this.showMapOrList}>
+          {showMap ? `Choose countries` : `Show Map`}
+        </button>
+        {showMap ? (
+          <BasicMap listOfCountries={listOfCountries} />
+        ) : (
+          <CountryInput selectedCountries={listOfCountries} />
+        )}
       </>
     );
   }

@@ -1,37 +1,22 @@
 import React from "react";
+import listOfCountries from "../assets/listOfCountries";
+import "./CountryInput.scss";
 
 class CountryInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkedValues: ["Sweden"],
+      checkedValues: [],
       searchResultValues: [],
-      inputData: [
-        "Sweden",
-        "France",
-        "United States",
-        "Canada",
-        "Djibouti",
-        "Japan",
-        "Australia",
-        "Spain",
-        "Portugal",
-        "United Kingdom",
-        "Italy",
-        "Croatia",
-        "Switzerland",
-        "Austria",
-        "Germany",
-        "Finland",
-        "Norway",
-        "Morocco",
-        "Egypt",
-        "Brazil",
-        "Hong Kong",
-        "Mexico",
-      ],
+      inputData: listOfCountries,
     };
     this.checkBox = this.checkBox.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState((state, props) => {
+      return { checkedValues: props.selectedCountries };
+    });
   }
 
   checkBox(value, condition) {
@@ -42,8 +27,6 @@ class CountryInput extends React.Component {
       const index = checkedValues.indexOf(value);
       checkedValues.splice(index, 1);
     }
-
-    this.props.callbackfromParent("okii"); // eslint-disable-line
 
     this.setState({ checkedValues });
   }
@@ -67,10 +50,9 @@ class CountryInput extends React.Component {
     const result =
       searchResultValues.length !== 0
         ? searchResultValues.map(data => (
-            <div key={data}>
-              {" "}
-              <p>{data}</p>
+            <div key={data} className="result-div">
               <input
+                className="result-checkbox"
                 type="checkbox"
                 value={data}
                 checked={checkedValues.includes(data)}
@@ -78,6 +60,7 @@ class CountryInput extends React.Component {
                   this.checkBox(data, e.target.checked);
                 }}
               />
+              <p className="result-text">{data}</p>
             </div>
           ))
         : null;
@@ -93,15 +76,16 @@ class CountryInput extends React.Component {
     const result =
       checkedValues.length !== 0
         ? checkedValues.map(data => (
-            <div key={data}>
+            <div key={data} className="check-value-div">
               <button
                 value={data}
                 onClick={e => this.removeCheckValues(e.target.value)}
                 type="button"
+                className="check-value-button"
               >
-                x
+                {String.fromCharCode(215)}
               </button>
-              <p>{data}</p>
+              <p className="check-value-text">{data}</p>
             </div>
           ))
         : null;
@@ -110,16 +94,17 @@ class CountryInput extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>{this.showCheckedValues()}</div>
+      <div className="container">
+        <div className="check-value-container">{this.showCheckedValues()}</div>
         <input
           type="text"
           name="Search"
+          autoComplete="off"
           placeholder="Search Data"
           className="input-box"
           onChange={e => this.filterResult(e)}
         />
-        <div>{this.showSearchResult()}</div>
+        <div className="search-result-container">{this.showSearchResult()}</div>
       </div>
     );
   }

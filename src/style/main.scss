@@ -1,4 +1,6 @@
 $base-color: #35477d;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 body {
   background-color: $base-color;
+  font-family: "Source Sans Pro", sans-serif;
 }
