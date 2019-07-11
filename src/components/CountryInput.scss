@@ -1,31 +1,58 @@
-$white-color: #f5f5f9;
+$white-color: #f9f3ec;
 .container {
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin-right: auto;
-  margin-left: auto;
-  text-align: center;
-}
-.result-text {
-  display: inline;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
 }
 .input-box {
   margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.2rem;
+  font-family: inherit;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  transition: box-shadow 300ms;
+  width: 15rem;
+  background: $white-color;
+  box-shadow: 0 0 0.4rem #263359;
+  &:focus {
+    outline: none;
+    box-shadow: 0.2rem 0.4rem 2rem #263359;
+  }
+}
+.result-checkbox {
+  display: none;
 }
 .search-result-container {
   margin-right: auto;
   margin-left: auto;
   text-align: left;
   background: $white-color;
-  max-height: 10rem;
+  max-height: 20rem;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
   overflow-x: hidden;
   list-style: none;
-  padding: 0rem 0.5rem;
-  max-width: 15rem;
-  border-radius: 1px;
+  width: 15rem;
+  border-radius: 0.2rem;
+}
+.result-div {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.8rem;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #c06c84;
+  }
+}
+.result-text {
+  display: inline;
+  font-size: 1.2rem;
 }
 .search-result-container::-webkit-scrollbar {
   width: 0;
@@ -36,8 +63,7 @@ $white-color: #f5f5f9;
 }
 .check-value-div {
   display: inline-block;
-
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   margin: 0.2rem;
   background: #4c66b3;
   padding: 0.2rem;

@@ -11,12 +11,15 @@ class CountryInput extends React.Component {
       inputData: listOfCountries,
     };
     this.checkBox = this.checkBox.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+    this.countryInput = React.createRef();
   }
 
   componentDidMount() {
     this.setState((state, props) => {
       return { checkedValues: props.selectedCountries };
     });
+    this.countryInput.current.focus();
   }
 
   checkBox(value, condition) {
@@ -29,6 +32,8 @@ class CountryInput extends React.Component {
     }
 
     this.setState({ checkedValues });
+    this.countryInput.current.focus();
+    this.countryInput.current.value = "";
   }
 
   filterResult(e) {
@@ -44,13 +49,34 @@ class CountryInput extends React.Component {
       this.setState({ searchResultValues: [] });
     }
   }
+  // eslint-disable-next-line
+  clickHandler(e) {
+    let name;
+    const { checkedValues } = this.state;
+    try {
+      name = e.target.querySelector("p").innerHTML;
+    } catch (err) {
+      name = e.target.innerHTML;
+    }
+    const checked = checkedValues.includes(name);
+    this.checkBox(name, !checked);
+  }
 
   showSearchResult() {
     const { searchResultValues, checkedValues } = this.state;
     const result =
       searchResultValues.length !== 0
         ? searchResultValues.map(data => (
-            <div key={data} className="result-div">
+            <div
+              role="button"
+              tabIndex={0}
+              key={data}
+              className="result-div"
+              onClick={this.clickHandler}
+              onKeyPress={e => {
+                this.clickHandler(e);
+              }}
+            >
               <input
                 className="result-checkbox"
                 type="checkbox"
@@ -98,9 +124,10 @@ class CountryInput extends React.Component {
         <div className="check-value-container">{this.showCheckedValues()}</div>
         <input
           type="text"
+          ref={this.countryInput}
           name="Search"
           autoComplete="off"
-          placeholder="Search Data"
+          placeholder="Search Country"
           className="input-box"
           onChange={e => this.filterResult(e)}
         />
