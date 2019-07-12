@@ -1,4 +1,5 @@
-$white-color: #f9f3ec;
+@import "../style/colors.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -16,10 +17,10 @@ $white-color: #f9f3ec;
   transition: box-shadow 300ms;
   width: 15rem;
   background: $white-color;
-  box-shadow: 0 0 0.4rem #263359;
+  box-shadow: 0 0 0.4rem $base-color-dark-1;
   &:focus {
     outline: none;
-    box-shadow: 0.2rem 0.4rem 2rem #263359;
+    box-shadow: 0.2rem 0.4rem 2rem $base-color-dark-1;
   }
 }
 .result-checkbox {
@@ -47,7 +48,7 @@ $white-color: #f9f3ec;
   padding: 0.8rem;
   transition: background-color 0.2s;
   &:hover {
-    background-color: #c06c84;
+    background-color: $light-red;
   }
 }
 .result-text {
@@ -65,8 +66,10 @@ $white-color: #f9f3ec;
   display: inline-block;
   border-radius: 0.2rem;
   margin: 0.2rem;
-  background: #4c66b3;
+  background: $dark-red;
   padding: 0.2rem;
+  font-family: inherit;
+  font-size: 1.5rem;
 }
 .check-value-text {
   display: inline-block;
@@ -77,4 +80,5 @@ $white-color: #f9f3ec;
   border: none;
   background: inherit;
   color: $white-color;
+  font-size: 1.5rem;
 }

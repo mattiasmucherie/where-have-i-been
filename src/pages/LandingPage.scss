@@ -1,0 +1,12 @@
+@import "../style/colors.scss";
+
+.switch-button {
+  border: none;
+  background: #57606d;
+  font-size: 2rem;
+  font-family: inherit;
+  margin: 1rem 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: $white-color;
+}

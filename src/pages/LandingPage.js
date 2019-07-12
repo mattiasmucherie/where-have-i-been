@@ -1,6 +1,7 @@
 import React from "react";
 import BasicMap from "../components/BasicMap";
 import CountryInput from "../components/CountryInput";
+import "./LandingPage.scss";
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -22,7 +23,11 @@ class LandingPage extends React.Component {
     const { listOfCountries, showMap } = this.state;
     return (
       <>
-        <button type="button" onClick={this.showMapOrList}>
+        <button
+          className="switch-button"
+          type="button"
+          onClick={this.showMapOrList}
+        >
           {showMap ? `Choose countries` : `Show Map`}
         </button>
         {showMap ? (
